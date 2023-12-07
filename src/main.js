@@ -1,5 +1,5 @@
 import { render } from './render.js';
-import {FilterView} from './filter.js';
+import {FilterView} from './view//filter.js';
 import EventsPresenter from './presenter/events-presenter.js';
 
 
