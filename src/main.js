@@ -1,13 +1,19 @@
-import NewTaskButtonView from './view/new-task-button-view.js';
-import FilterView from './view/filter-view.js';
 import {render} from './render.js';
-import BoardPresenter from './presenter/board-presenter.js';
+import FilterView from './view/filter.js';
+import EventsModel from './model/events-model.js';
+import EventsPresenter from './presenter/events-presenter.js';
 
-const siteMainElement = document.querySelector('.main');
-const siteHeaderElement = siteMainElement.querySelector('.main__control');
-const boardPresenter = new BoardPresenter({boardContainer: siteMainElement});
+const siteHeader = document.querySelector('.page-header');
+const tripControlsFilters = siteHeader.querySelector('.trip-controls__filters');
+const pageMain = document.querySelector('.page-main');
+const tripEvents = pageMain.querySelector('.trip-events');
 
-render(new NewTaskButtonView(), siteHeaderElement);
-render(new FilterView(), siteMainElement);
+const eventsModel = new EventsModel();
+const eventsPresenter = new EventsPresenter({
+  eventsContainer: tripEvents,
+  eventsModel,
+});
 
-boardPresenter.init();
+render(new FilterView(), tripControlsFilters);
+
+eventsPresenter.init();
