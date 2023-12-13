@@ -1,3 +1,3 @@
-const COLORS = ['black', 'yellow', 'blue', 'green', 'pink'];
+const EVENT_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
-export{COLORS};
+export {EVENT_TYPES};
