@@ -31,8 +31,7 @@ export default class EventsPresenter {
     render(new EventEditView({event: this.#events[1], offers: this.#offers, destinations: this.#destinations}), this.#eventListComponent.getElement());
 
     for (let i = 0; i < this.#events.length; i++) {
-      const currentEventOffers = this.#offers.find((offer) => offer.type === this.#events[i].type);
-      render(new EventView({event: this.#events[i], offers: currentEventOffers, destinations: this.#destinations}), this.#eventListComponent.getElement());
+      render(new EventView({event: this.#events[i], offers: this.#offers, destinations: this.#destinations}), this.#eventListComponent.getElement());
     }
   }
 }
