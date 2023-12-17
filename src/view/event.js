@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { DATE_FORMAT, formatDate, calculateDuration } from '../utils.js';
 
-function createEventTemplate(event, availableOffers, destinations) {
+function createEventTemplate(event, allOffers, destinations) {
   const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type} = event;
 
   const dateTime = formatDate(dateFrom, DATE_FORMAT.yearMonthDay);
@@ -15,6 +15,8 @@ function createEventTemplate(event, availableOffers, destinations) {
     ? 'event__favorite-btn--active'
     : '';
   const duration = calculateDuration(dateFrom, dateTo);
+
+  const eventTypeOffers = allOffers.find((offer) => offer.type === type);
 
   return (
     `<li class="trip-events__item">
@@ -45,7 +47,7 @@ function createEventTemplate(event, availableOffers, destinations) {
       <h4 class="visually-hidden">Offers:</h4>
 
       <ul class="event__selected-offers">
-      ${availableOffers.offers.map((offer) => {
+      ${eventTypeOffers.offers.map((offer) => {
       if (offers.includes(offer.id)) {
         return (
           `<li class="event__offer">
