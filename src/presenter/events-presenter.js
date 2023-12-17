@@ -33,5 +33,9 @@ export default class EventsPresenter {
     for (let i = 0; i < this.#events.length; i++) {
       render(new EventView({event: this.#events[i], offers: this.#offers, destinations: this.#destinations}), this.#eventListComponent.getElement());
     }
+    //#renderEvent(event) {
+    //const eventComponent = new EventView({event});
+
+    //render (eventComponent, this.#eventListComponent.element)
   }
 }
