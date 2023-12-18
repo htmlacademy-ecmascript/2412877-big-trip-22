@@ -1,25 +1,79 @@
-import {getRandomArrayElement} from '../utils.js';
+import { EVENT_TYPES } from '../const.js';
+import { getRandomArrayElement } from '../utils.js';
+import { getRandomDestinationID } from './destination.js';
 
 const mockEvents = [
   {
-    id: '1',
-    basePrice: 10,
-    dateFrom: new Date('2019-07-10T22:55:56'),
-    dateTo: new Date('2019-07-11T11:22:13'),
-    destination: 'Tokyo',
+    id: 1,
+    price: 1100,
+    dateFrom: new Date('2023-12-20'),
+    dateTo: new Date('2023-12-23'),
+    destination: getRandomDestinationID(),
     isFavorite: false,
-    offers: [1,2],
-    type: 'flight'
+    offers: [
+      1
+    ],
+    type: getRandomArrayElement(EVENT_TYPES)
   },
   {
-    id: '2',
-    basePrice: 15,
-    dateFrom: new Date('2019-07-10T22:55:56'),
-    dateTo: new Date('2019-07-11T11:22:13'),
-    destination: 'Seoul',
+    id: 2,
+    price: 2000,
+    dateFrom: new Date('2023-12-15'),
+    dateTo: new Date('2023-12-23'),
+    destination: getRandomDestinationID(),
     isFavorite: true,
-    offers: [1,2],
-    type: 'taxi'
+    offers: [
+      1
+    ],
+    type: getRandomArrayElement(EVENT_TYPES)
+  },
+  {
+    id: 3,
+    price: 100,
+    dateFrom: new Date('2023-12-20'),
+    dateTo: new Date('2023-12-21'),
+    destination: getRandomDestinationID(),
+    isFavorite: false,
+    offers: [
+      2, 3
+    ],
+    type: getRandomArrayElement(EVENT_TYPES)
+  },
+  {
+    id: 4,
+    price: 8100,
+    dateFrom: new Date('2023-12-01'),
+    dateTo: new Date('2023-12-31'),
+    destination: getRandomDestinationID(),
+    isFavorite: false,
+    offers: [
+      2
+    ],
+    type: getRandomArrayElement(EVENT_TYPES)
+  },
+  {
+    id: 5,
+    price: 1300,
+    dateFrom: new Date('2023-12-19'),
+    dateTo: new Date('2023-12-23'),
+    destination: getRandomDestinationID(),
+    isFavorite: true,
+    offers: [
+      1, 3
+    ],
+    type: getRandomArrayElement(EVENT_TYPES)
+  },
+  {
+    id: 6,
+    price: 600,
+    dateFrom: new Date('2023-10-18'),
+    dateTo: new Date('2023-12-24'),
+    destination: getRandomDestinationID(),
+    isFavorite: false,
+    offers: [
+      1, 4
+    ],
+    type: getRandomArrayElement(EVENT_TYPES)
   },
 ];
 

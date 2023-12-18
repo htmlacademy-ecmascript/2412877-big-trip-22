@@ -1,22 +1,31 @@
 import dayjs from 'dayjs';
 
-const DATE_FORMAT = {
-  dayMonth: 'D MMM',
-  yearMonthDay: 'YYYY-MM-D',
-  fullDate: 'YYYY-MM-DTHH:mm',
-  hoursMinutes: 'HH:mm'
-};
+const DATE_FORMAT = 'D MMM';
+const MS_IN_DAY = 86400000;
+const MS_IN_HOUR = 3600000;
 
-function getRandomArrayElement(items) {
-  return items[Math.floor(Math.random() * items.length)];
+function getRandomNumber(min = 1, max = 100) {
+  return Math.floor(min + Math.random() * (max + 1 - min));
 }
 
-function formatDate(dateFrom, format) {
-  return dateFrom ? dayjs(dateFrom).format(format) : '';
+function getRandomArrayElement(items) {
+  return items[getRandomNumber(0, items.length - 1)];
+}
+
+function formatDate(date) {
+  return date ? dayjs(date).format(DATE_FORMAT) : '';
 }
 
 function calculateDuration(startDate, endDate) {
-  return dayjs(endDate).diff(startDate, 'mm');
+  const timeDuration = dayjs(endDate).diff(startDate);
+  let timeFormat = 'DD[D] HH[H] mm[M]';
+  if (timeDuration < MS_IN_DAY) {
+    timeFormat = 'HH[H] mm[M]';
+  }
+  if (timeDuration < MS_IN_HOUR) {
+    timeFormat = 'mm[M]';
+  }
+  return dayjs(timeDuration).format(timeFormat);
 }
 
-export {getRandomArrayElement, DATE_FORMAT, formatDate, calculateDuration};
+export {getRandomArrayElement, getRandomNumber, formatDate, calculateDuration};
