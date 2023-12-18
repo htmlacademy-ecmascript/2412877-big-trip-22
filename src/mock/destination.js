@@ -1,4 +1,4 @@
-import { getRandomNumber } from '../utils';
+import { getRandomArrayElement, getRandomNumber } from '../utils.js';
 
 const mockDestinations = [
   {
@@ -6,14 +6,6 @@ const mockDestinations = [
     description: 'Chamonix, is a beautiful city, a true asian pearl, with crowded streets.',
     name: 'Chamonix',
     pictures: [
-      {
-        src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
-        description: 'Chamonix'
-      },
-      {
-        src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
-        description: 'Chamonix'
-      },
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
         description: 'Chamonix'
@@ -28,14 +20,6 @@ const mockDestinations = [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
         description: 'Amsterdam'
-      },
-      {
-        src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
-        description: 'Amsterdam'
-      },
-      {
-        src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
-        description: 'Amsterdam'
       }
     ]
   },
@@ -47,17 +31,39 @@ const mockDestinations = [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
         description: 'Geneva'
-      },
+      }
+    ]
+  },
+  {
+    id: 4,
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    name: 'Paris',
+    pictures: [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
-        description: 'Geneva'
-      },
+        description: 'Paris'
+      }
+    ]
+  },
+  {
+    id: 5,
+    description: 'Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.',
+    name: 'London',
+    pictures: [
       {
         src: `https://loremflickr.com/248/152?random=${getRandomNumber()}`,
-        description: 'Geneva'
+        description: 'London'
       }
     ]
   },
 ];
 
-export {mockDestinations};
+function getRandomDestinationID() {
+  return getRandomArrayElement(mockDestinations).id;
+}
+
+function getMockDestinations() {
+  return mockDestinations;
+}
+
+export {getRandomDestinationID, getMockDestinations};
