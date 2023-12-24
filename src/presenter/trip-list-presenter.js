@@ -18,6 +18,7 @@ export default class TripListPresenter {
     this.#eventsModel = eventsModel;
   }
 
+
   init() {
     this.eventsList = [...this.#eventsModel.events];
     this.offersList = [...this.#eventsModel.offers];
