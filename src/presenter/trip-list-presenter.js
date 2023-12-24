@@ -4,6 +4,7 @@ import ListView from '../view/list-view.js';
 import PointView from '../view/point-view.js';
 import EditPointView from '../view/edit-point-view.js';
 import { render, replace } from '../framework/render.js';
+import EmptyListView from '../view/empty-list-view.js';
 
 export default class TripListPresenter {
   #tripListComponent = new ListView();
@@ -22,7 +23,13 @@ export default class TripListPresenter {
     this.offersList = [...this.#eventsModel.offers];
     this.destinationsList = [...this.#eventsModel.destinations];
 
-    render(new FilterView(), this.#filterContainer);
+    render(new FilterView({points: this.eventsList}), this.#filterContainer);
+
+    if (this.eventsList.length === 0) {
+      render(new EmptyListView(), this.#listContainer);
+      return;
+    }
+
     render(new SortView(), this.#listContainer);
     render(this.#tripListComponent, this.#listContainer);
 
