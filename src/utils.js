@@ -9,14 +9,6 @@ const MS_IN_HOUR = 3600000;
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-function getRandomNumber(min = 1, max = 100) {
-  return Math.floor(min + Math.random() * (max + 1 - min));
-}
-
-function getRandomArrayElement(items) {
-  return items[getRandomNumber(0, items.length - 1)];
-}
-
 function formatDate(date, dateFormat) {
   return date ? dayjs(date).format(dateFormat) : '';
 }
@@ -43,10 +35,6 @@ const filter = {
   [FilterTypes.PAST]: (events) => events.filter((event) => dayjs().isAfter(dayjs(event.dateTo)))
 };
 
-function updateItem(items, newItem) {
-  return items.map((item) => item.id === newItem.id ? newItem : item);
-}
-
 function isEscapeKey(evt) {
   return evt.key === 'Escape';
 }
@@ -57,4 +45,4 @@ const sort = {
   [SortTypes.TIME]: (points) => points.sort((first, second) => calculateDuration(second.dateFrom, second.dateTo, true) - calculateDuration(first.dateFrom, first.dateTo, true))
 };
 
-export {getRandomArrayElement, getRandomNumber, formatDate, calculateDuration, filter, updateItem, isEscapeKey, sort};
+export {formatDate, calculateDuration, filter, isEscapeKey, sort};
