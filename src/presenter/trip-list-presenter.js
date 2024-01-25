@@ -4,13 +4,15 @@ import ListView from '../view/list-view.js';
 import { render } from '../framework/render.js';
 import EmptyListView from '../view/empty-list-view.js';
 import PointPresenter from './point-presenter.js';
-import { updateItem } from '../utils.js';
+import { sort, updateItem } from '../utils.js';
+import { SortTypes } from '../const.js';
 
 export default class TripListPresenter {
   #tripListComponent = new ListView();
   #listContainer = null;
   #filterContainer = null;
   #eventsModel = null;
+  #currentSortType = SortTypes.DAY;
   #pointPresenters = new Map();
 
   constructor(listContainer, filterContainer, eventsModel) {
@@ -30,7 +32,7 @@ export default class TripListPresenter {
       render(new EmptyListView(), this.#listContainer);
       return;
     }
-
+    this.#renderSortList();
     this.#renderPointsBoard();
   }
 
@@ -38,13 +40,22 @@ export default class TripListPresenter {
     render(new FilterView({points: this.eventsList}), this.#filterContainer);
   }
 
+  #renderSortList() {
+    render(new SortView({onSortChange: this.#handleSortChange}), this.#listContainer);
+  }
+
   #renderPointsBoard() {
-    render(new SortView(), this.#listContainer);
     render(this.#tripListComponent, this.#listContainer);
+
+    sort[this.#currentSortType](this.eventsList);
 
     for (let i = 0; i < this.eventsList.length; i++) {
       this.#renderPoint(this.eventsList[i]);
     }
+  }
+
+  #clearPointsBoard() {
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
   }
 
   #renderPoint(point) {
@@ -66,6 +77,17 @@ export default class TripListPresenter {
 
   #handleModeChange = () => {
     this.#pointPresenters.forEach((presenter) => presenter.resetFormView());
+  };
+
+  #handleSortChange = (evt) => {
+    if (evt.target.closest('input')) {
+      if (this.#currentSortType === evt.target.dataset.sortType) {
+        return;
+      }
+      this.#currentSortType = evt.target.dataset.sortType;
+      this.#clearPointsBoard();
+      this.#renderPointsBoard();
+    }
   };
 
 }
